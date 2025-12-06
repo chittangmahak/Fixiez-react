@@ -1,233 +1,144 @@
-import {
-  Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-} from '@mui/material';
-import React, { useState } from 'react';
+import React from 'react';
 
-const Signup = ({ togglePanel }) => {
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-    phoneNumber: '',
-    gender: '',
-  });
-
-  const [errors, setErrors] = useState({});
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const validateForm = () => {
-    const newErrors = {};
-
-    // Name validation: Only letters allowed
-    const nameRegex = /^[A-Z a-z]+$/;
-
-    if (!formData.firstName.trim()) {
-      newErrors.firstName = 'First Name is required';
-    } else if (!nameRegex.test(formData.firstName)) {
-      newErrors.firstName = 'only character allowed';
-    }
-
-    if (!formData.lastName.trim()) {
-      newErrors.lastName = 'Last Name is required';
-    } else if (!nameRegex.test(formData.lastName)) {
-      newErrors.lastName = 'only character allowed';
-    }
-
-    // Email validation
-    const emailRegex =
-      /^[a-zA-Z0-9._%+-]+@(gmail\.com|outlook\.com|yahoo\.com)$/;
-
-    if (!formData.email || !emailRegex.test(formData.email)) {
-      newErrors.email =
-        'Please enter a valid email address (e.g., @gmail.com, @outlook.com, @yahoo.com).';
-    }
-
-    // Phone Number Validation (10 digits only)
-    const phoneRegex = /^[6-9][0-9]{9}$/;
-    if (!formData.phoneNumber || !phoneRegex.test(formData.phoneNumber)) {
-      newErrors.phoneNumber = 'Invalid phone number';
-    }
-
-    // Password Validation
-    // const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
-    // "Password must contain at least one number, one uppercase letter, one lowercase letter, and be at least 8 characters long.";
-
-    const passwordRegex = /^.{6,}$/;
-    if (!formData.password) {
-      newErrors.password = 'Password is required';
-    } else if (!passwordRegex.test(formData.password)) {
-      newErrors.password = 'Password must be 6 digits';
-    }
-
-    // Confirm Password Validation
-    if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = 'Passwords do not match';
-    }
-
-    return newErrors;
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const formErrors = validateForm();
-
-    if (Object.keys(formErrors).length > 0) {
-      setErrors(formErrors);
-    } else {
-      console.log('register form', formData);
-      alert('Signup Successfully');
-
-      setErrors('');
-      togglePanel();
-
-      setFormData({
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
-        phoneNumber: '',
-        gender: '',
-      });
-    }
-  };
-
+export default function Signup() {
   return (
-    <div>
-      <h1 className='text-lg font-bold text-center pb-5 pt-5'>Register</h1>
-      <form className='space-y-4' onSubmit={handleSubmit}>
-        <div className='flex justify-between items-center space-x-3'>
-          <TextField
-            fullWidth
-            label='First Name'
-            name='firstName'
-            value={formData.firstName}
-            required
-            onChange={handleChange}
-            placeholder='Enter Your First Name'
-            error={!!errors.firstName}
-            helperText={errors.firstName}
-          />
-          <TextField
-            fullWidth
-            label='Last Name'
-            name='lastName'
-            value={formData.lastName}
-            required
-            onChange={handleChange}
-            placeholder='Enter Your Last Name'
-            error={!!errors.lastName}
-            helperText={errors.lastName}
-          />
-        </div>
-        <div>
-          <TextField
-            fullWidth
-            label='Email'
-            name='email'
-            type='email'
-            required
-            value={formData.email}
-            onChange={handleChange}
-            placeholder='Enter Your Email'
-            error={!!errors.email}
-            helperText={errors.email}
-          />
-        </div>
-        <div className='flex justify-center items-center space-x-3'>
-          <TextField
-            fullWidth
-            label='Phone Number'
-            name='phoneNumber'
-            type='tel'
-            required
-            value={formData.phoneNumber}
-            onChange={handleChange}
-            placeholder='Enter Your Phone Number'
-            error={!!errors.phoneNumber}
-            helperText={errors.phoneNumber}
-          />
-          <FormControl fullWidth error={!!errors.gender}>
-            <TextField
-              // id="outlined-select-currency"
-              select
-              label='Gender'
-              // defaultValue="Gender"
-              name='gender'
-              required
-              value={formData.gender}
-              onChange={handleChange}
-              placeholder='Select Your Gender'
-              // helperText="Please select your currency"
-            >
-              {/* <Select
-              name="gender"
-              value={formData.gender}
-              required
-              onChange={handleChange}
-            > */}
-              <MenuItem value='male'>Male</MenuItem>
-              <MenuItem value='female'>Female</MenuItem>
-              <MenuItem value='other'>Other</MenuItem>
-              {/* </Select> */}
-            </TextField>
-          </FormControl>
+    <div className='min-h-screen w-full flex items-center justify-center bg-[#0d061f] p-4'>
+      {/* Main Container */}
+      <div className='bg-white w-full max-w-6xl min-h-[90vh] rounded-2xl overflow-hidden shadow-2xl grid grid-cols-1 md:grid-cols-2'>
+        {/* Left Section */}
+        <div className='bg-gradient-to-b from-[#7A00FF] to-[#5200CC] text-white p-10 flex flex-col justify-center'>
+          <h1 className='text-3xl font-bold mb-4'>Welcome to FIXIEZ</h1>
+          <p className='text-sm opacity-90 mb-8'>
+            Your trusted partner for device repair parts, tools, and services.
+            Join our community of repair professionals and DIY enthusiasts.
+          </p>
+
+          <ul className='space-y-4 text-sm'>
+            <li className='flex items-center gap-3'>
+              <span className='w-6 h-6 bg-white/20 rounded-full flex items-center justify-center'>
+                ✓
+              </span>
+              Secure & Trusted Platform
+            </li>
+            <li className='flex items-center gap-3'>
+              <span className='w-6 h-6 bg-white/20 rounded-full flex items-center justify-center'>
+                ✓
+              </span>
+              Fast Delivery Across India
+            </li>
+            <li className='flex items-center gap-3'>
+              <span className='w-6 h-6 bg-white/20 rounded-full flex items-center justify-center'>
+                ✓
+              </span>
+              Professional Repair Tools & Parts
+            </li>
+            <li className='flex items-center gap-3'>
+              <span className='w-6 h-6 bg-white/20 rounded-full flex items-center justify-center'>
+                ✓
+              </span>
+              24/7 Customer Support
+            </li>
+          </ul>
         </div>
 
-        <div className='flex justify-between items-center space-x-3'>
-          <TextField
-            fullWidth
-            label='Password'
-            name='password'
-            type='password'
-            required
-            value={formData.password}
-            onChange={handleChange}
-            placeholder='Enter Your Password'
-            error={!!errors.password}
-            helperText={errors.password}
-          />
-          <TextField
-            fullWidth
-            label='Confirm Password'
-            name='confirmPassword'
-            type='password'
-            required
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            placeholder='Confirm Your Password'
-            error={!!errors.confirmPassword}
-            helperText={errors.confirmPassword}
-          />
-        </div>
+        {/* Right Section - Signup Form */}
+        <div className='p-10 overflow-y-auto'>
+          <h2 className='text-2xl font-bold mb-6'>Create Account</h2>
 
-        <Button
-          fullWidth
-          className='custom-btn'
-          type='submit'
-          variant='contained'
-          sx={{ padding: '0.9rem' }}
-        >
-          Register
-        </Button>
-      </form>
-      <div className='flex items-center gap-2 py-5 justify-center'>
-        <span>Already have an account?</span>
-        <Button onClick={togglePanel}>Log-in</Button>
+          <form className='space-y-4'>
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+              <input
+                type='text'
+                placeholder='First Name'
+                className='input-box'
+              />
+              <input
+                type='text'
+                placeholder='Last Name'
+                className='input-box'
+              />
+            </div>
+
+            <input
+              type='email'
+              placeholder='Email Address'
+              className='input-box'
+            />
+            <input
+              type='number'
+              placeholder='Phone Number'
+              className='input-box'
+            />
+            <input
+              type='text'
+              placeholder='Official Address'
+              className='input-box'
+            />
+
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+              <input type='text' placeholder='City' className='input-box' />
+              <input type='text' placeholder='Pincode' className='input-box' />
+            </div>
+
+            <input
+              type='text'
+              placeholder='IMEI Number (Optional)'
+              className='input-box'
+            />
+
+            <input
+              type='password'
+              placeholder='Create a password'
+              className='input-box'
+            />
+            <input
+              type='password'
+              placeholder='Confirm password'
+              className='input-box'
+            />
+
+            <div className='flex items-center gap-2 text-sm'>
+              <input type='checkbox' />
+              <span>
+                I agree to the{' '}
+                <a className='text-blue-600' href='#'>
+                  Terms of Service
+                </a>{' '}
+                and
+                <a className='text-blue-600 ml-1' href='#'>
+                  Privacy Policy
+                </a>
+              </span>
+            </div>
+
+            <button className='w-full bg-[#7A00FF] hover:bg-[#5d00c7] text-white font-semibold py-2 rounded-lg transition'>
+              Create Account
+            </button>
+          </form>
+
+          <div className='my-4 text-center text-sm opacity-70'>
+            Or continue with
+          </div>
+
+          <div className='flex items-center justify-center gap-4'>
+            <button className='border rounded-lg px-4 py-2 w-full flex items-center justify-center gap-2 text-sm'>
+              <span>🔵</span> Google
+            </button>
+            <button className='border rounded-lg px-4 py-2 w-full flex items-center justify-center gap-2 text-sm'>
+              <span>🔵</span> Facebook
+            </button>
+          </div>
+
+          <div className='text-center mt-4 text-sm'>
+            Already have an account?{' '}
+            <a href='#' className='text-blue-600'>
+              Sign In
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   );
-};
+}
 
-export default Signup;
+/* Tailwind Custom Classes */

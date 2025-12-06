@@ -5,11 +5,11 @@ import {
   UserCircleIcon,
   ChevronDownIcon,
 } from '@heroicons/react/24/outline';
-
-
-
+import { useNavigate } from 'react-router';
 
 export default function Navbar() {
+  const navigate = useNavigate();
+
   const cityData = {
     Bangalore: ['Koramangala', 'BTM Layout', 'Whitefield'],
     Chennai: ['T Nagar', 'Kodambakkam', 'Anna Nagar'],
@@ -77,7 +77,10 @@ export default function Navbar() {
             </div>
           </div>
 
-          <div className='flex items-center gap-1 cursor-pointer hover:bg-gray-100 px-6 py-3 '>
+          <div
+            onClick={() => navigate('/auth')}
+            className='flex items-center gap-1 cursor-pointer hover:bg-gray-100 px-6 py-3 '
+          >
             <UserCircleIcon className='w-6 h-6 text-gray-700' />
             <span className='font-medium'>Login / Signup</span>
           </div>
