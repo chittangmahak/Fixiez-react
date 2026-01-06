@@ -48,19 +48,17 @@ const Profile = () => {
     if (file) {
       const imageUrl = URL.createObjectURL(file);
       setProfileData({ ...profileData, profileImage: imageUrl });
-      setIsEditing(true); // Automatically switch to editing mode when image changes
+      setIsEditing(true);
     }
   };
 
   const handleUpdate = async () => {
-    // Logic for dispatching update profile API would go here
     setSuccessMsg('Profile updated successfully!');
     setIsEditing(false);
     setTimeout(() => setSuccessMsg(''), 4000);
   };
 
   const handleCancel = () => {
-    // Reset to original data
     setProfileData({
       firstName: admin?.firstName || '',
       lastName: admin?.lastName || '',
@@ -172,7 +170,7 @@ const Profile = () => {
               }
             >
               <Avatar
-                src={profileData.profileImage} // Using local preview state
+                src={profileData.profileImage}
                 sx={{
                   width: 140,
                   height: 140,
