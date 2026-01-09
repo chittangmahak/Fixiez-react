@@ -37,6 +37,8 @@ function App() {
             element={<ListYourPropertyPage />}
           />
 
+          <Route path='/dashboard' element={<Dashboard />} />
+
           {/* 🔓 AUTH PAGE */}
           <Route
             path='/auth'
@@ -49,7 +51,7 @@ function App() {
         {/* 🔒 PRIVATE ROUTES */}
         <Route element={<PrivateRoute />}>
           <Route element={<PrivateLayout />}>
-            <Route path='/dashboard' element={<Dashboard />} />
+            {/* <Route path='/dashboard' element={<Dashboard />} /> */}
             <Route path='/profile' element={<Profile />} />
             <Route path='/security-settings' element={<SecuritySettings />} />
           </Route>
